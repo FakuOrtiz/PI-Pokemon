@@ -12,6 +12,7 @@ module.exports = (sequelize) => {
     name: { //data.name
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     hp: { //data.stats[0].base_stat
       type: DataTypes.INTEGER
@@ -33,6 +34,11 @@ module.exports = (sequelize) => {
     },
     image: { //data.sprites.front_default
       type: DataTypes.STRING
+    },
+    createdInDB: { //si tiene esta prop, es creado
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false
     }
   }, {
     timestamps: false
