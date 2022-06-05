@@ -12,6 +12,6 @@ router.get("/pokemons", getPokemons);
 router.post("/pokemons", postPokemons);
 router.get("/types", getTypes);
 //A lo último porque es variable
-router.get("/pokemons/:idPokemon", getOnePokemon);
+router.get("/pokemons/:id", getOnePokemon);
 
 module.exports = router;

@@ -6,8 +6,9 @@ module.exports = {
     getPokemons: async (req, res, next) => {
         let {name} = req.query;
         if (!name || name === undefined) {
+            let pokemonsCreated = await Pokemon.findAll();
             try {
-                let {data} = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=40")
+                let {data} = await axios.get("https://pokeapi.co/api/v2/pokemon")
                 
                 let urls = [];
                 data.results?.map(p => urls.push(p.url));
@@ -24,8 +25,13 @@ module.exports = {
                         speed: data.stats[5].base_stat,
                         height: data.height,
                         weight: data.weight,
-                        image: data.sprites.front_default
+                        image: data.sprites.front_default,
+                        types: data.types.map(t => t.type.name)
                     })
+                }
+                if (pokemonsCreated.length > 0) {
+                    pokemonsCreated = pokemonsCreated.map(p => p.dataValues);
+                    pokemons = pokemons.concat(pokemonsCreated);
                 }
                 res.json(pokemons)
             } catch (error) {
@@ -44,7 +50,8 @@ module.exports = {
                     speed: data.stats[5].base_stat,
                     height: data.height,
                     weight: data.weight,
-                    image: data.sprites.front_default
+                    image: data.sprites.front_default,
+                    types: data.types.map(t => t.type.name)
                 });
             } catch (error) {
                 res.status(500).send("No se encuentra el pokemon solicitado")
@@ -52,17 +59,15 @@ module.exports = {
         }
     },
     getOnePokemon: async (req, res, next) => {
-        let {idPokemon} = req.params;
+        let {id} = req.params;
         //Si tiene "-", es un pokemon creado, sino viene de la API
-        if (idPokemon.includes("-")) {
+        if (id.includes("-")) {
             try {
-                let data = await Pokemon.findByPk({
-                    where: {
-                        id: idPokemon
-                    },
+                let data = await Pokemon.findByPk(
+                    id, {
                     include: { //Lo traigo linkeado a la tabla Type con su atributo
                         model: Type,
-                        attributes: ["name"]
+                        attributes: ["name", "id"]
                     }
                 });
                 res.json(data);
@@ -71,7 +76,7 @@ module.exports = {
             }
         }else{
             try {
-                let {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}/`);
+                let {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
 
                 res.json({
                     id: data.id,
@@ -82,7 +87,8 @@ module.exports = {
                     speed: data.stats[5].base_stat,
                     height: data.height,
                     weight: data.weight,
-                    image: data.sprites.front_default
+                    image: data.sprites.front_default,
+                    types: data.types.map(t => t.type.name)
                 });
             } catch (error) {
                 res.status(500).send("No se encuentra el pokemon solicitado");
@@ -105,8 +111,8 @@ module.exports = {
         }
     },
     getTypes: async (req, res, next) => {
-        let allTipos = await Type.findAll();
-            if (allTipos.length === 0) {
+        let tiposDB = await Type.findAll();
+            if (tiposDB.length === 0) {
                 try {
                     let {data} = await axios.get("https://pokeapi.co/api/v2/type/");
         
@@ -129,7 +135,7 @@ module.exports = {
                     next(error);
                 }
             }else{
-                res.json(allTipos);
+                res.json(tiposDB);
             }
     }
 }
