@@ -11,7 +11,7 @@ function crearObj(data) {
         speed: data.stats[5].base_stat,
         height: data.height,
         weight: data.weight,
-        image: data.sprites.front_default,
+        image: data.sprites.other.home.front_default,
         types: data.types.map(t => t.type.name)
     }
 }
@@ -28,7 +28,7 @@ module.exports = {
 
         if (!name || name === undefined) {
             try {
-                let {data} = await axios.get("https://pokeapi.co/api/v2/pokemon")
+                let {data} = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=40")
                 
                 let urls = [];
                 data.results?.map(p => urls.push(p.url));
@@ -56,7 +56,7 @@ module.exports = {
                 } else {
                     let find = await Pokemon.findOne({
                         where: {
-                            name: name
+                            name: name.toLowerCase()
                         },
                         include: {
                             model: Type,
@@ -70,7 +70,7 @@ module.exports = {
                     res.json(crearObj(data));
                 }
             } catch (error) {
-                res.status(500).send("No se encuentra el pokemon solicitado");
+                res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
             }
         }
     },
@@ -89,7 +89,7 @@ module.exports = {
                 });
                 res.json(data);
             } catch (error) {
-                res.status(500).send("No se encuentra el pokemon solicitado");
+                res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
             }
         }else{
             try {
@@ -97,24 +97,26 @@ module.exports = {
 
                 res.json(crearObj(data));
             } catch (error) {
-                res.status(500).send("No se encuentra el pokemon solicitado");
+                console.log(error)
+                res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
             }
         }
     },
 
     postPokemons: async (req, res, next) => {
         //Los types llegan como un array de IDs
-        let {name, hp, attack, defense, speed, height, weight, image, types} = req.body;
-        if (!image || image === undefined) {
-            image = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/201.png";
+        let {name, hp, attack, defense, speed, height, weight, image, type} = req.body;
+        if (!image || image === undefined || image === "") {
+            image = "https://camo.githubusercontent.com/5d1fe59c3f0e4cfb5480bb8d8b1eb3ba58906acef846904fde8afcc5f773adbb/68747470733a2f2f692e696d6775722e636f6d2f583962314b75362e706e67";
         }
         try {
-            let pokemon = {name, hp, attack, defense, speed, height, weight, image, types};
+            name = name.toLowerCase();
+            let pokemon = {name, hp, attack, defense, speed, height, weight, image, type};
             let newPoke = await Pokemon.create(pokemon);
-            await newPoke.addType(types);
+            await newPoke.addType(type);
             res.json(newPoke);
         } catch (error) {
-            next(error)
+            next(error);
         }
     },
 
