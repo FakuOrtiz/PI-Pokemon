@@ -6,6 +6,11 @@ export const GET_ALL_TYPES = "GET_ALL_TYPES";
 export const CREATE_POKEMON = "CREATE_POKEMON";
 export const DELETE_POKEMON = "DELETE_POKEMON";
 export const CLEAN_CACHE = "CLEAN_CACHE";
+export const CLEAN_CACHE_ALL = "CLEAN_CACHE_ALL";
+export const FILTER_ALPHABET = "FILTER_ALPHABET";
+export const FILTER_ORIGEN = "FILTER_ORIGEN";
+export const FILTER_ATTACK = "FILTER_ATTACK";
+export const FILTER_TYPE = "FILTER_TYPE";
 
 export function getAllPokemons() {
     return function(dispatch) {
@@ -53,14 +58,31 @@ export function createPokemon(values) {
     }
 };
 
-
-export const deletePokemon = (id) => {
-    return {
-        type: DELETE_POKEMON,
-        payload: id
-    }
-};
-
 export const cleanCache = () => {
     return {type: CLEAN_CACHE}
 }
+
+export const cleanCacheAll = () => {
+    return {type: CLEAN_CACHE_ALL}
+}
+
+
+export const filterByAlphabet = (payload) => {
+    return {type: FILTER_ALPHABET, payload}
+}
+
+export const filterByOrigen = (payload) => {
+    return {type: FILTER_ORIGEN, payload}
+}
+
+export const filterByAttack = (payload) => {
+    return {type: FILTER_ATTACK, payload}
+}
+
+export const filterByType = (payload) => {
+    return {type: FILTER_TYPE, payload}
+}
+
+export const deletePokemon = (id) => {
+    return {type: DELETE_POKEMON, payload: id}
+};

@@ -4,7 +4,7 @@ const {
     getOnePokemon,
     postPokemons,
     getTypes
-} = require("../controllers/controllers");
+} = require("../controllers");
 
 const router = Router();
 

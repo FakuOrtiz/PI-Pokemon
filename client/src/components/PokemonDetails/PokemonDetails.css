@@ -1,0 +1,7 @@
+.buttonBack {
+    width: 70px;
+    height: 30px;
+    position: absolute;
+    left: 1%;
+    cursor: pointer;
+}

@@ -1,0 +1,31 @@
+.contenedorCard {
+    margin: 30px auto;
+    border-radius: 50px;
+    box-shadow: 0px 0px 15px 2px #000000;
+    background-color: rgba(55,109,186, .5)
+}
+
+.contenedorCard:hover {
+    filter: opacity(.7);
+}
+
+.imagenCard {
+    width: 250px;
+    max-height: 250px;
+    border-radius: 50px;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.nombreCard {
+    text-align: center;
+    text-decoration: none;
+}
+
+.typesCard {
+    text-align: center;
+}
+
+.navlink {
+    text-decoration: none;
+    color: black;
+}

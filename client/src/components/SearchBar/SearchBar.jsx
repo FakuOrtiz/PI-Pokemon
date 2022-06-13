@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { getPokemonByName } from "../../redux/actions";
+import "./SearchBar.css";
 
 export default function SearchBar() {
   let [name, setName] = useState("");
@@ -11,12 +12,12 @@ export default function SearchBar() {
 
   const history = useHistory();
 
-  let pokemon = useSelector((state) => state.pokemon);
+  let pokemon = useSelector(state => state.pokemon);
 
   return (
     <div>
       <div>
-        <button onClick={() => history.push("/crear")}>CREAR POKÉMON</button>
+        <button onClick={() => history.push("/crear")} className="buttonCrear">CREAR POKÉMON</button>
       </div>
       <form
         onSubmit={async (e) => {
@@ -29,11 +30,9 @@ export default function SearchBar() {
           placeholder="Nombre de pokémon..."
           onChange={(e) => setName(e.target.value?.toLowerCase())}
         />
-        {name ? (
-          <button type="submit" onClick={() => setFlag(true)}>
+          <button disabled={name.length === 0} type="submit" onClick={() => setFlag(true)} className="buttonSearch">
             Buscar
           </button>
-        ) : null}
       </form>
       {/* El flag es pq cuando vuelvo con el botón "Back" desde Details, el pokemon.id da true en la condición,
        enotnces al renderizar a este componente, el flag es false, por lo que no redirecciona infinitamente*/}
