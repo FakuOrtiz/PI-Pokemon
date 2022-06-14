@@ -1,7 +1,8 @@
 .contenedorNavbar {
-    margin: 20px auto;
+    padding: 20px;
     color: black;
     text-align: center;
+    background-color: #1663b1;
 }
 
 .tituloNavbar {

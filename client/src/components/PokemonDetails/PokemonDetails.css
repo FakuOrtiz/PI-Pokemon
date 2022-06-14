@@ -5,3 +5,30 @@
     left: 1%;
     cursor: pointer;
 }
+
+.contenedorDetails {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    margin: 23.5px auto;
+    width: 300px;
+    border-radius: 10px;
+    background-color: #ffcc04;
+    box-shadow: 0px 0px 15px 2px #000000;
+}
+
+.tiposDetails {
+    display: inline-flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.contenedorDetails2 {
+    display: grid;
+    grid-template-columns: 150px 150px;
+}
+
+.imagenDetails {
+    width: 300px;
+    border-radius: 10px;
+}

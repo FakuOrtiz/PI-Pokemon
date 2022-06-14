@@ -26,7 +26,6 @@ export default function Pokemon() {
 
   const allPokemons = pokePerPage();
 
-  
   let nextPage = () => {
     setPage(page + 12)
   }
@@ -65,22 +64,16 @@ export default function Pokemon() {
     dispatch(getAllPokemons())
   }
 
-
   return (
     pokemons.length < 2 ?
-    <Loading/> :
+    <Loading/>
+    :
     <>
-      <div>
+      <div className="contenedorFiltros">
         <select defaultValue="Ordenar alfabeticamente:" name='order-alphabet' onChange={e => handleAlphabet(e)}>
             <option disabled>Ordenar alfabeticamente:</option>
             <option value="az">A-Z</option>
             <option value="za">Z-A</option>
-        </select>
-
-        <select defaultValue="Ordenar por origen:" name='order-origen' onChange={e => handleOrigen(e)}>
-            <option disabled>Ordenar por origen:</option>
-            <option value="originales">Originales</option>
-            <option value="creados">Creados</option>
         </select>
 
         <select defaultValue="Ordenar por ataque:" name='order-attack' onChange={e => handleAttack(e)}>
@@ -89,8 +82,16 @@ export default function Pokemon() {
             <option value="menosAtaque">Menor ataque</option>
         </select>
 
-        <select defaultValue="Ordenar por tipo:" name='order-type' onChange={e => handleType(e)}>
-          <option disabled>Ordenar por tipo:</option>
+        <select defaultValue="Filtrar por origen:" name='order-origen' onChange={e => handleOrigen(e)}>
+            <option disabled>Filtrar por origen:</option>
+            <option value="default">Todos</option>
+            <option value="originales">Originales</option>
+            <option value="creados">Creados</option>
+        </select>
+
+        <select defaultValue="Filtrar por tipo:" name='order-type' onChange={e => handleType(e)}>
+          <option disabled>Filtrar por tipo:</option>
+          <option value="default">Todos</option>
         {
           types && types.map(t => {
             return (
@@ -99,12 +100,13 @@ export default function Pokemon() {
           })
         }
         </select>
-        {/*AGREGAR UNA FUNCION QUE HAGA CLEAN Y LLAME DE NUEVO LOS POKES */}
-        <button onClick={() => handleReset()}>RESET</button>
+        <button className="buttonReset" onClick={() => handleReset()}>RESET</button>
+      </div>
 
-    </div>
-      <button disabled={page === 0} onClick={() => prevPage()}>PREV</button>
-      <button disabled={allPokemons.length < 12} onClick={() => nextPage()}>NEXT</button>
+      <div className="contenedorPaginado">
+        <button className="buttonPaginado" disabled={page === 0} onClick={() => prevPage()}>PREV</button>
+        <button className="buttonPaginado" disabled={allPokemons.length < 12} onClick={() => nextPage()}>NEXT</button>
+      </div>
       <div className="contenedorPokemon">
         {
         allPokemons && allPokemons.map((p) => {
@@ -119,9 +121,10 @@ export default function Pokemon() {
             }
         })}
       </div>
-      <button disabled={page === 0} onClick={() => prevPage()}>PREV</button>
-      <button disabled={allPokemons.length < 12} onClick={() => nextPage()}>NEXT</button>
+      <div className="contenedorPaginado">
+        <button className="buttonPaginado" disabled={page === 0} onClick={() => prevPage()}>PREV</button>
+        <button className="buttonPaginado" disabled={allPokemons.length < 12} onClick={() => nextPage()}>NEXT</button>
+      </div>
     </>
   );
-
 }

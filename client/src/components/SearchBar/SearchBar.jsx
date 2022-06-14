@@ -15,17 +15,18 @@ export default function SearchBar() {
   let pokemon = useSelector(state => state.pokemon);
 
   return (
-    <div>
-      <div>
+    <div className="contenedorSearchbar">
+      <div className="contenedorButtonCrear">
         <button onClick={() => history.push("/crear")} className="buttonCrear">CREAR POKÉMON</button>
       </div>
-      <form
+      <form className="contenedorButtonSearch"
         onSubmit={async (e) => {
           e.preventDefault();
           dispatch(getPokemonByName(name));
         }}
       >
         <input
+        className="inputSearch"
           type="text"
           placeholder="Nombre de pokémon..."
           onChange={(e) => setName(e.target.value?.toLowerCase())}

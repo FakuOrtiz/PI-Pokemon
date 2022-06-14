@@ -1,0 +1,26 @@
+footer {
+    display: grid;
+    grid-template-columns: 400px;
+    justify-content: center;
+    text-align: center;
+    padding: 16px 0;
+    background-color: #1663b1;
+}
+
+.contenedorIconos {
+    grid-column-start: 2;
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+
+.linkedin {
+    margin: 0 10px 0 0;
+}
+
+.github {
+    margin: 0 auto;
+}
+
+.copy {
+    grid-row: 2;
+}

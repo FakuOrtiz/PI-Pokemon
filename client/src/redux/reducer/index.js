@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import {
     GET_ALL_POKEMONS,
     GET_POKEMON_BY_ID,
@@ -77,6 +78,12 @@ const rootReducer = (state = initialState, action) => {
                 pokemonsFiltrados: pokesAlpha
             }
         case FILTER_ORIGEN:
+            if (action.payload === "default") {
+                return {
+                    ...state,
+                    pokemonsFiltrados: state.pokemons
+                }
+            }
             let pokesOrigen;
             if (action.payload === "originales") {
                 pokesOrigen = state.pokemons.filter(p => !p.hasOwnProperty("createdInDB"));
@@ -101,8 +108,13 @@ const rootReducer = (state = initialState, action) => {
                 pokemonsFiltrados: pokesAttack
             }
         case FILTER_TYPE:
+            if (action.payload === "default") {
+                return {
+                    ...state,
+                    pokemonsFiltrados: state.pokemons
+                }
+            }
             let pokesType;
-            // eslint-disable-next-line array-callback-return
             pokesType = state.pokemons.filter(p => {
                 if (p.createdInDB) {
                     for (let i = 0; i < p.types.length; i++) {

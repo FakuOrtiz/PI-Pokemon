@@ -17,7 +17,6 @@ export default class NavBar extends Component {
                     <SearchBar />
                 </Route>
             </Switch>
-            <hr />
         </div>
     )
   }

@@ -73,17 +73,20 @@ export default function CrearPokemon() {
     }
 
     
-    let checkTypes = (input, setInput) => {
-        let selectBox = document.getElementById("selectBox");
-        let boxValue = selectBox.options[selectBox.selectedIndex].value;
-    
+    let checkTypes = (input, setInput, e) => {
         if (input.type.length === 2) {
             return null;
+        }
+
+        for (let i of input.type) {
+            if (Number(e.target.value) === i) {
+                return alert("No se puede elegir dos veces el mismo tipo")
+            }
         }
     
         setInput({
             ...input,
-            type: [...input.type, Number(boxValue)]
+            type: [...input.type, Number(e.target.value)]
         })
     }
 
@@ -140,8 +143,8 @@ export default function CrearPokemon() {
             <br/>
             <div>
                 <label>Tipo/s (máx. 2): </label>
-                <select name="type" id='selectBox' onChange={() => checkTypes(input, setInput)}>
-                    <option value="10001">Elegir:</option>
+                <select defaultValue="10001" name="type" onChange={(e) => checkTypes(input, setInput, e)}>
+                    <option disabled value="10001">Elegir:</option>
                     {
                         type?.map(t => {
                             return (
@@ -152,12 +155,12 @@ export default function CrearPokemon() {
                 </select>
                 {/*Acá me renderiza los nombres de los tipos seleccionados*/}
                 {
-                    input.type && input.type.map(tId => {
-                        let tipo = type.find(obj => obj.id === tId);
+                    input.type && input.type.map(t => {
+                        let tipo = type.find(obj => obj.id === t);
                         return (
                             <div key={tipo.id}>
-                            <p>{tipo.name}</p>
-                            <button type='button' value={tipo.id} onClick={e => eliminarOpcion(e)}>X</button>
+                                <p>{tipo.name}</p>
+                                <button type='button' value={tipo.id} onClick={e => eliminarOpcion(e)}>X</button>
                             </div>
                         )
                     })

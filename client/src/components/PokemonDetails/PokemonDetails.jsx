@@ -10,27 +10,25 @@ import "./PokemonDetails.css";
 
 export default function PokemonDetails() {
   let { id } = useParams();
-
+  
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const pokemon = useSelector((state) => state.pokemon);
+  
   useEffect(() => {
     dispatch(getPokemonById(id));
-  }, [dispatch, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   let cleanAndBack = () => {
-    // dispatch(getAllPokemons());
     history.push("/pokemons");
-    //Borro el estado pokémon, para que al buscar otro pokémon, no aparezca el que busqué antes
     dispatch(cleanCache());
   };
-
-  let pokemon = useSelector((state) => state.pokemon);
 
   let i = 0;
   return (
     pokemon.msj ?
-    <Error404/> //poner clean cache
+    <Error404/>
     :
     pokemon.length === 0 ? 
     <Loading/>
@@ -38,12 +36,11 @@ export default function PokemonDetails() {
     <div>
       <button onClick={cleanAndBack} className="buttonBack">{"<-"} BACK</button>
       {
-          <div>
+          <div className="contenedorDetails">
             {pokemon.createdInDB ? null : <p>#{pokemon.id}</p>}
-            <img src={pokemon.image} alt="pokemon" />
+            <img src={pokemon.image} className="imagenDetails" alt="pokemon" />
             <h4>{pokemon.name?.toUpperCase()}</h4>
-            <div>
-              Tipos:
+            <div className="tiposDetails">
               {pokemon.createdInDB ? (
                 pokemon.types?.map((t) => {
                   i++;
@@ -53,17 +50,19 @@ export default function PokemonDetails() {
                 <>
                   {pokemon.types?.map((t) => {
                     i++;
-                    return <p key={i}> {t} </p>;
+                    return <p key={i}>{t}</p>;
                   })}
                 </>
               )}
             </div>
-            <p>HP: {pokemon.hp}</p>
-            <p>Ataque: {pokemon.attack}</p>
-            <p>Defensa: {pokemon.defense}</p>
-            <p>Velocidad: {pokemon.speed}</p>
-            <p>Altura: {pokemon.height}</p>
-            <p>Peso: {pokemon.weight}</p>
+            <div className="contenedorDetails2">
+              <p>HP: {pokemon.hp}</p>
+              <p>Velocidad: {pokemon.speed}</p>
+              <p>Ataque: {pokemon.attack}</p>
+              <p>Defensa: {pokemon.defense}</p>
+              <p>Altura: {pokemon.height}</p>
+              <p>Peso: {pokemon.weight}</p>
+            </div>
           </div>
       }
     </div>
