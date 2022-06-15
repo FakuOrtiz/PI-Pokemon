@@ -4,7 +4,6 @@ export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const GET_ALL_TYPES = "GET_ALL_TYPES";
 export const CREATE_POKEMON = "CREATE_POKEMON";
-export const DELETE_POKEMON = "DELETE_POKEMON";
 export const CLEAN_CACHE = "CLEAN_CACHE";
 export const CLEAN_CACHE_ALL = "CLEAN_CACHE_ALL";
 export const ORDER_ALPHABET = "ORDER_ALPHABET";
@@ -87,7 +86,3 @@ export const filterByType = (payload) => {
 export const setCurrentPage = (payload) => {
     return {type: SET_CURRENT_PAGE, payload}
 }
-
-export const deletePokemon = (id) => {
-    return {type: DELETE_POKEMON, payload: id}
-};

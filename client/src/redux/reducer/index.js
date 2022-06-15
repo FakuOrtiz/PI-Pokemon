@@ -5,7 +5,6 @@ import {
     GET_POKEMON_BY_NAME,
     GET_ALL_TYPES,
     CREATE_POKEMON,
-    DELETE_POKEMON,
     CLEAN_CACHE,
     ORDER_ALPHABET,
     FILTER_ORIGEN,
@@ -67,11 +66,6 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             pokemons: [...state.pokemons, action.payload],
             pokemonsFiltrados: [...state.pokemons, action.payload],
-            page: 1
-        }
-        case DELETE_POKEMON: return {
-            ...state,
-            pokemons: state.pokemons.filter(({id}) => id !== action.payload),
             page: 1
         }
         case CLEAN_CACHE: return {
