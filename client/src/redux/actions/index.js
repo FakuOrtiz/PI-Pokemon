@@ -50,10 +50,10 @@ export function getAllTypes() {
 export function createPokemon(values) {
     return async function(dispatch) {
         try {
-                const {data} = await axios.post("http://localhost:3001/pokemons", values);
-                dispatch({type: CREATE_POKEMON, payload: data});
+            const {data} = await axios.post("http://localhost:3001/pokemons", values);
+            dispatch({type: CREATE_POKEMON, payload: data});
         } catch (error) {
-                console.log(error);
+            console.log(error);
         }
     }
 };
