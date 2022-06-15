@@ -41,19 +41,22 @@ export default function PokemonDetails() {
             <img src={pokemon.image} className="imagenDetails" alt="pokemon" />
             <h4>{pokemon.name?.toUpperCase()}</h4>
             <div className="tiposDetails">
-              {pokemon.createdInDB ? (
-                pokemon.types?.map((t) => {
-                  i++;
-                  return <p key={i}>{t.name}</p>;
-                })
-              ) : (
-                <>
-                  {pokemon.types?.map((t) => {
+              {
+                pokemon.createdInDB ?
+                  pokemon.types?.map((t) => {
                     i++;
-                    return <p key={i}>{t}</p>;
-                  })}
-                </>
-              )}
+                    return <p key={i}>{t.name}</p>;
+                  })
+                  :
+                  <>
+                    {
+                      pokemon.types?.map((t) => {
+                        i++;
+                        return <p key={i}>{t}</p>;
+                      })
+                    }
+                  </>
+              }
             </div>
             <div className="contenedorDetails2">
               <p>HP: {pokemon.hp}</p>

@@ -28,7 +28,7 @@ export default function SearchBar() {
         <input
         className="inputSearch"
           type="text"
-          placeholder="Nombre de pokémon..."
+          placeholder="Buscar..."
           onChange={(e) => setName(e.target.value?.toLowerCase())}
         />
           <button disabled={name.length === 0} type="submit" onClick={() => setFlag(true)} className="buttonSearch">

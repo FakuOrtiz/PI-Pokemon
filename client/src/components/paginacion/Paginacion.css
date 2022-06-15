@@ -1,0 +1,33 @@
+.contenedorPaginado ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+}
+
+.contenedorPaginado ul button {
+    cursor: pointer;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.contenedorPaginado ul button:not(:disabled):hover {
+    background-color: rgba(55, 110, 186, 0.308);
+}
+
+.contenedorPaginado ul button:disabled {
+    cursor: not-allowed;
+    border: 1px solid rgba(112, 112, 112, 0.753);
+}
+
+.btnActive {
+    background-color: #ffcc04;
+}
+
+.btnPagination {
+    background-color: #ffcd0469;
+}

@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import Loading from "../loading/Loading"
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom';
-import { cleanCacheAll, createPokemon, getAllPokemons } from '../../redux/actions';
+import { cleanCacheAll, createPokemon, getAllPokemons, getAllTypes } from '../../redux/actions';
 import "./CrearPokemon.css";
 
 
@@ -19,10 +21,17 @@ export default function CrearPokemon() {
     })
     let [errors, setErrors] = useState({});
 
+
     const dispatch = useDispatch();
     const type = useSelector(state => state.types);
     const pokemons = useSelector(state => state.pokemons);
     const history = useHistory();
+
+
+    useEffect(() => {
+        dispatch(getAllPokemons());
+        dispatch(getAllTypes());
+    }, [dispatch]);
 
 
     let handleInputChange = e => {
@@ -42,7 +51,6 @@ export default function CrearPokemon() {
         e.preventDefault();
         dispatch(createPokemon(input));
         dispatch(cleanCacheAll());
-        dispatch(getAllPokemons());
         history.push("/pokemons");
         alert("¡Pokémon creado correctamente!");
     }
@@ -75,12 +83,13 @@ export default function CrearPokemon() {
     
     let checkTypes = (input, setInput, e) => {
         if (input.type.length === 2) {
+            alert("No se puede elegir más de dos tipos")
             return null;
         }
 
         for (let i of input.type) {
             if (Number(e.target.value) === i) {
-                return alert("No se puede elegir dos veces el mismo tipo")
+                return alert("No se puede elegir dos veces el mismo tipo");
             }
         }
     
@@ -91,54 +100,57 @@ export default function CrearPokemon() {
     }
 
   return (
+    pokemons.length < 1 ?
+    <Loading />
+    :
     <div>
         <button onClick={() => history.push("/pokemons")} className="buttonBack">{"<-"} BACK</button>
         <form className='formCrear'>
             <div>
                 {errors.name && <p className='error'>{errors.name}</p>}
                 <label>Nombre: </label>
-                <input type="text" name='name' value={input.name} onChange={e => handleInputChange(e)}/>
+                <input autoComplete='off' type="text" name='name' value={input.name} onChange={e => handleInputChange(e)}/>
             </div>
             <br/>
             <div>
                 {errors.hp && <p className='error'>{errors.hp}</p>}
                 <label>HP: </label>
-                <input type="number" name='hp' value={input.hp} onChange={e => handleInputChange(e)}/>
+                <input autoComplete='off' type="number" name='hp' value={input.hp} onChange={e => handleInputChange(e)}/>
             </div>
             <br/>
             <div>
                 {errors.attack && <p className='error'>{errors.attack}</p>}
                 <label>Ataque: </label>
-                <input type="number" name='attack' value={input.attack} onChange={e => handleInputChange(e)}/>
+                <input autoComplete='off' type="number" name='attack' value={input.attack} onChange={e => handleInputChange(e)}/>
             </div>
             <br/>
             <div>
                 {errors.defense && <p className='error'>{errors.defense}</p>}
                 <label>Defensa: </label>
-                <input type="number" name='defense' value={input.defense} onChange={e => handleInputChange(e)}/>
+                <input autoComplete='off' type="number" name='defense' value={input.defense} onChange={e => handleInputChange(e)}/>
             </div>
             <br/>
             <div>
                 {errors.speed && <p className='error'>{errors.speed}</p>}
                 <label>Velocidad: </label>
-                <input type="number" name='speed' value={input.speed} onChange={e => handleInputChange(e)}/>
+                <input autoComplete='off' type="number" name='speed' value={input.speed} onChange={e => handleInputChange(e)}/>
             </div>
             <br/>
             <div>
                 {errors.height && <p className='error'>{errors.height}</p>}
                 <label>Altura: </label>
-                <input type="number" name='height' value={input.height} onChange={e => handleInputChange(e)}/>
+                <input autoComplete='off' type="number" name='height' value={input.height} onChange={e => handleInputChange(e)}/>
             </div>
             <br/>
             <div>
                 {errors.weight && <p className='error'>{errors.weight}</p>}
                 <label>Peso: </label>
-                <input type="number" name='weight' value={input.weight} onChange={e => handleInputChange(e)}/>
+                <input autoComplete='off' type="number" name='weight' value={input.weight} onChange={e => handleInputChange(e)}/>
             </div>
             <br/>
             <div>
                 <label>URL de imagen: </label>
-                <input type="text" name="image" value={input.image} onChange={e => handleInputChange(e)} />
+                <input autoComplete='off' type="text" name="image" value={input.image} onChange={e => handleInputChange(e)} />
             </div>
             <br/>
             <div>
@@ -153,14 +165,14 @@ export default function CrearPokemon() {
                         })
                     }
                 </select>
-                {/*Acá me renderiza los nombres de los tipos seleccionados*/}
                 {
-                    input.type && input.type.map(t => {
+                    /*Acá me renderiza los nombres de los tipos seleccionados*/
+                    input.type?.map(t => {
                         let tipo = type.find(obj => obj.id === t);
                         return (
-                            <div key={tipo.id}>
+                            <div key={tipo.id} className="contenedorTypeSelected">
                                 <p>{tipo.name}</p>
-                                <button type='button' value={tipo.id} onClick={e => eliminarOpcion(e)}>X</button>
+                                <button className='btnTypeSelected' type='button' value={tipo.id} onClick={e => eliminarOpcion(e)}>X</button>
                             </div>
                         )
                     })

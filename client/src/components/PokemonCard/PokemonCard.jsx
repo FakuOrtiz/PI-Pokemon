@@ -11,10 +11,12 @@ export default class PokemonCard extends Component {
             <img className="imagenCard" src={this.props.image} alt={this.props.name?.toLowerCase()}/>
             <h4 className="nombreCard">{this.props.name?.toUpperCase()}</h4>
           </NavLink>
-          {this.props.types?.map((t) => {
-            i++;
-            return <h5 key={i} className="typesCard">{t}</h5>;
-          })}
+          {
+            this.props.types?.map((t) => {
+              i++;
+              return <h5 key={i} className="typesCard">{t}</h5>;
+            })
+          }
       </div>
     );
   }

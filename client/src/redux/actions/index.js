@@ -7,10 +7,11 @@ export const CREATE_POKEMON = "CREATE_POKEMON";
 export const DELETE_POKEMON = "DELETE_POKEMON";
 export const CLEAN_CACHE = "CLEAN_CACHE";
 export const CLEAN_CACHE_ALL = "CLEAN_CACHE_ALL";
-export const FILTER_ALPHABET = "FILTER_ALPHABET";
+export const ORDER_ALPHABET = "ORDER_ALPHABET";
 export const FILTER_ORIGEN = "FILTER_ORIGEN";
-export const FILTER_ATTACK = "FILTER_ATTACK";
+export const ORDER_ATTACK = "ORDER_ATTACK";
 export const FILTER_TYPE = "FILTER_TYPE";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 export function getAllPokemons() {
     return function(dispatch) {
@@ -67,20 +68,24 @@ export const cleanCacheAll = () => {
 }
 
 
-export const filterByAlphabet = (payload) => {
-    return {type: FILTER_ALPHABET, payload}
+export const orderByAlphabet = (payload) => {
+    return {type: ORDER_ALPHABET, payload}
 }
 
 export const filterByOrigen = (payload) => {
     return {type: FILTER_ORIGEN, payload}
 }
 
-export const filterByAttack = (payload) => {
-    return {type: FILTER_ATTACK, payload}
+export const orderByAttack = (payload) => {
+    return {type: ORDER_ATTACK, payload}
 }
 
 export const filterByType = (payload) => {
     return {type: FILTER_TYPE, payload}
+}
+
+export const setCurrentPage = (payload) => {
+    return {type: SET_CURRENT_PAGE, payload}
 }
 
 export const deletePokemon = (id) => {

@@ -11,17 +11,22 @@
     padding: 16px 0;
 }
 
-.contenedorPaginado {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin: 16px 0;
+.contenedorFiltros select {
+    border-radius: 20px;
+    border: 1px solid black;
 }
 
-.buttonPaginado {
-    cursor: pointer;
+.contenedorFiltros button {
+    border-radius: 20px;
+    border: 1px solid black;
+    width: 55px;
 }
 
 .buttonReset {
     cursor: pointer;
+    transition: .3s;
+}
+
+.buttonReset:hover {
+    background-color: #ffcc04;
 }
