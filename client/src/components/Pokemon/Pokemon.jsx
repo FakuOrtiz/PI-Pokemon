@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PokemonCard from "../pokemonCard/PokemonCard";
@@ -26,9 +27,9 @@ export default function Pokemon() {
   const currentPokes = pokemonsFiltrados.slice(indexOfFirstPoke, indexOfLastPoke);
 
   useEffect(() => {
-    if (pokemons.length < 1) dispatch(getAllPokemons())
+    if (pokemons.length < 2) dispatch(getAllPokemons())
     dispatch(getAllTypes());
-  }, [dispatch, pokemons.length]);
+  }, [dispatch]);
 
   
   let handleAlphabet = (e) => {

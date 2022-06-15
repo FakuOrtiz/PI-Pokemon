@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react'
 import Loading from "../loading/Loading"
 import { useEffect } from 'react';
@@ -29,7 +30,7 @@ export default function CrearPokemon() {
 
 
     useEffect(() => {
-        dispatch(getAllPokemons());
+        if (pokemons.length < 2) dispatch(getAllPokemons());
         dispatch(getAllTypes());
     }, [dispatch]);
 
@@ -50,8 +51,8 @@ export default function CrearPokemon() {
     let handleSubmit = e => {
         e.preventDefault();
         dispatch(createPokemon(input));
-        dispatch(cleanCacheAll());
         alert("¡Pokémon creado correctamente!");
+        dispatch(cleanCacheAll());
         history.push("/pokemons");
     }
 
