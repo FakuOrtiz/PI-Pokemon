@@ -31,12 +31,30 @@ const rootReducer = (state = initialState, action) => {
             pokemonsFiltrados: action.payload,
             page: 1
         }
-        case GET_POKEMON_BY_ID: return {
+        case GET_POKEMON_BY_ID: 
+        if (action.payload.msj) {
+            let error = {error: "No se encontró el pokémon"}
+            return {
+                ...state,
+                pokemon: error,
+                page: 1
+            }
+        }
+        return {
             ...state,
             pokemon: action.payload,
             page: 1
         }
-        case GET_POKEMON_BY_NAME: return {
+        case GET_POKEMON_BY_NAME: 
+        if (action.payload.msj) {
+            let error = {error: "No se encontró el pokémon"}
+            return {
+                ...state,
+                pokemon: error,
+                page: 1
+            }
+        }
+        return {
             ...state,
             pokemon: action.payload,
             page: 1

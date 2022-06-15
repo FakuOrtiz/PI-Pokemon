@@ -5,11 +5,13 @@ import Loading from "../loading/Loading";
 import "./Pokemon.css"
 import { cleanCacheAll, orderByAlphabet, orderByAttack, filterByOrigen, filterByType, getAllPokemons, getAllTypes } from "../../redux/actions";
 import Paginacion from "../paginacion/Paginacion";
+import Error404 from "../error404/Error404";
 
 export default function Pokemon() {
   let [/*filtrados*/, setFiltrados] = useState();
 
 
+  let pokemon = useSelector(state => state.pokemon);
   let pokemons = useSelector(state => state.pokemons);
   let types = useSelector(state => state.types);
   let pokemonsFiltrados = useSelector(state => state.pokemonsFiltrados)
@@ -56,6 +58,8 @@ export default function Pokemon() {
   }
 
   return (
+    pokemon.error ?
+    <Error404 /> :
     pokemons.length < 2 ?
     <Loading/>
     :

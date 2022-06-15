@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { cleanCache, getPokemonById } from "../../redux/actions";
-import Error404 from "../error404/Error404";
 import Loading from "../loading/Loading";
 import "./PokemonDetails.css";
 
@@ -27,9 +26,6 @@ export default function PokemonDetails() {
 
   let i = 0;
   return (
-    pokemon.msj ?
-    <Error404/>
-    :
     pokemon.length === 0 ? 
     <Loading/>
     :

@@ -51,8 +51,8 @@ export default function CrearPokemon() {
         e.preventDefault();
         dispatch(createPokemon(input));
         dispatch(cleanCacheAll());
-        history.push("/pokemons");
         alert("¡Pokémon creado correctamente!");
+        history.push("/pokemons");
     }
 
 
@@ -83,7 +83,7 @@ export default function CrearPokemon() {
     
     let checkTypes = (input, setInput, e) => {
         if (input.type.length === 2) {
-            alert("No se puede elegir más de dos tipos")
+            alert("No puedes elegir más de dos tipos")
             return null;
         }
 
