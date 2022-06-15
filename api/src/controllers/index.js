@@ -40,7 +40,11 @@ module.exports = {
                 }
 
                 if (pokemonsCreated.length > 0) {
-                    pokemonsCreated = pokemonsCreated.map(p => p.dataValues);
+                    pokemonsCreated = pokemonsCreated.map(p => {
+                        // console.log("p", p);
+                        // console.log("p.dataValues", p.dataValues)
+                        return p.dataValues
+                    });
                     pokemons = pokemons.concat(pokemonsCreated);
                 }
 
@@ -77,12 +81,12 @@ module.exports = {
 
     getOnePokemon: async (req, res, next) => {
         let {id} = req.params;
-        //Si tiene "-", es un pokemon creado, sino viene de la API
-        if (id.includes("-")) {
+        
+        if (id.includes("-")) {  //Si tiene "-", es un pokemon creado, sino viene de la API
             try {
                 let data = await Pokemon.findByPk(
                     id, {
-                    include: { //Lo traigo linkeado a la tabla Type con su atributo
+                    include: {
                         model: Type,
                         attributes: ["name"]
                     }

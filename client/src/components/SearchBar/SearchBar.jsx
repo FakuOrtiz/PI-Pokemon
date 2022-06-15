@@ -6,7 +6,6 @@ import "./SearchBar.css";
 
 export default function SearchBar() {
   let [name, setName] = useState("");
-  let [flag, setFlag] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -14,30 +13,27 @@ export default function SearchBar() {
 
   let pokemon = useSelector(state => state.pokemon);
 
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getPokemonByName(name));
+  }
+
   return (
     <div className="contenedorSearchbar">
       <div className="contenedorButtonCrear">
         <button onClick={() => history.push("/crear")} className="buttonCrear">CREAR POKÉMON</button>
       </div>
-      <form className="contenedorButtonSearch"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          dispatch(getPokemonByName(name));
-        }}
-      >
-        <input
-        className="inputSearch"
+
+      <form className="contenedorButtonSearch" onSubmit={(e) => handleSubmit(e)}>
+        <input className="inputSearch"
           type="text"
           placeholder="Buscar..."
           onChange={(e) => setName(e.target.value?.toLowerCase())}
         />
-          <button disabled={name.length === 0} type="submit" onClick={() => setFlag(true)} className="buttonSearch">
-            Buscar
-          </button>
+          <button disabled={name.length === 0} type="submit" className="buttonSearch">Buscar</button>
       </form>
-      {/* El flag es pq cuando vuelvo con el botón "Back" desde Details, el pokemon.id da true en la condición,
-       enotnces al renderizar a este componente, el flag es false, por lo que no redirecciona infinitamente*/}
-      {pokemon.id && flag ? <Redirect to={`/pokemons/${pokemon.id}`} /> : null}
+
+      {pokemon.id &&  <Redirect to={`/pokemons/${pokemon.id}`} />}
     </div>
   );
 }

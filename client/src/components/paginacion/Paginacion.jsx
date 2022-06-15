@@ -15,21 +15,21 @@ export default function Paginacion({allPokes}) {
     }
 
     return (
-        <nav className='contenedorPaginado'>
-            <ul>
-                <button disabled={currentPage - 1 === 0} onClick={() => dispatch(setCurrentPage(currentPage - 1))}>PREV</button>
-                {
-                    pageNumbers?.map(num => {
-                        return (
-                            <li key={num}>
-                                <button className={currentPage === num ? "btnActive" : "btnPagination"} onClick={() => dispatch(setCurrentPage(num))}>{num}</button>
-                            </li>
-                        )
-                    })
-                }
-                <button disabled={currentPage === totalPages} onClick={() => dispatch(setCurrentPage(currentPage + 1))}>NEXT</button>
-            </ul>
-        </nav>
+      <nav className='contenedorPaginado'>
+        <ul>
+          <button disabled={currentPage - 1 === 0} onClick={() => dispatch(setCurrentPage(currentPage - 1))}>PREV</button>
+            {
+              pageNumbers?.map(num => {
+                return (
+                  <li key={num}>
+                  <button className={currentPage === num ? "btnActive" : "btnPagination"} onClick={() => dispatch(setCurrentPage(num))}>{num}</button>
+                  </li>
+                )
+              })
+            }
+          <button disabled={currentPage === totalPages} onClick={() => dispatch(setCurrentPage(currentPage + 1))}>NEXT</button>
+        </ul>
+      </nav>
     )
 
 }

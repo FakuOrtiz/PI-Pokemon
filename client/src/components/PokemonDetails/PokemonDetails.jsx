@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,6 @@ export default function PokemonDetails() {
   
   useEffect(() => {
     dispatch(getPokemonById(id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   let cleanAndBack = () => {
@@ -41,20 +41,12 @@ export default function PokemonDetails() {
             <h4>{pokemon.name?.toUpperCase()}</h4>
             <div className="tiposDetails">
               {
-                pokemon.createdInDB ?
                   pokemon.types?.map((t) => {
                     i++;
-                    return <p key={i}>{t.name}</p>;
+                    return (
+                      <p key={i}>{pokemon.createdInDB ? t.name : t}</p>
+                    );
                   })
-                  :
-                  <>
-                    {
-                      pokemon.types?.map((t) => {
-                        i++;
-                        return <p key={i}>{t}</p>;
-                      })
-                    }
-                  </>
               }
             </div>
             <div className="contenedorDetails2">

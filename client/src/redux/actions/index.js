@@ -35,6 +35,7 @@ export function getPokemonByName(name) {
         return fetch(`http://localhost:3001/pokemons?name=${name}`)
         .then(r => r.json())
         .then(data => dispatch({type: GET_POKEMON_BY_NAME, payload: data}))
+        .catch(e => console.log(e))
     }
 }
 

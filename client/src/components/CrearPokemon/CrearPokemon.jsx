@@ -90,7 +90,7 @@ export default function CrearPokemon() {
 
         for (let i of input.type) {
             if (Number(e.target.value) === i) {
-                return alert("No se puede elegir dos veces el mismo tipo");
+                return alert("No puedes elegir dos veces el mismo tipo");
             }
         }
     

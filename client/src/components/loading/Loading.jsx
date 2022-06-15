@@ -5,7 +5,7 @@ import "./Loading.css"
 export default function Loading() {
   return (
     <div className='contenedorLoading'>
-        <img src={loading} alt="" />
+        <img src={loading} alt="loading" />
     </div>
   )
 }
