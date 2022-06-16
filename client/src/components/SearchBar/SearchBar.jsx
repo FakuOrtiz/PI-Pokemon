@@ -15,7 +15,8 @@ export default function SearchBar() {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getPokemonByName(name));
+    if (name !== "") return dispatch(getPokemonByName(name));
+    alert("Debes ingresar el nombre de un pokémon");
   }
 
   return (

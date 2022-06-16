@@ -32,7 +32,7 @@ module.exports = {
                 
                 let urls = [];
                 data.results?.map(p => urls.push(p.url));
-    
+                
                 let pokemons = [];
                 for (let url of urls) {
                     let {data} = await axios.get(url);

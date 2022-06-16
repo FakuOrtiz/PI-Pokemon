@@ -56,19 +56,19 @@ export default function CrearPokemon() {
         history.push("/pokemons");
     }
 
-
+    
     let validate = input => {
         let errors = {};
         let search = pokemons.find(e => e.name.toLowerCase() === input.name.toLowerCase());
         if (search) errors.name = "Ya existe un pokémon con ese nombre"
         if (!input.name || input.name.length > 20) errors.name = "El nombre debe tener entre 1 y 20 caracteres"
         if (input.name[0] === " ") errors.name = "El primer caracter no puede ser un espacio"
-        if (input.hp > 1000 || input.hp < 1) errors.hp = "El valor debe estar entre 1 y 1000" 
-        if (input.attack > 1000 || input.attack < 1) errors.attack = "El valor debe estar entre 1 y 1000" 
-        if (input.defense > 1000 || input.defense < 1) errors.defense = "El valor debe estar entre 1 y 1000" 
-        if (input.speed > 1000 || input.speed < 1) errors.speed = "El valor debe estar entre 1 y 1000" 
-        if (input.height > 1000 || input.height < 1) errors.height = "El valor debe estar entre 1 y 1000" 
-        if (input.weight > 1000 || input.weight < 1) errors.weight = "El valor debe estar entre 1 y 1000" 
+        if (input.hp > 1000 || input.hp < 1 || !/\d/g.test(input.hp)) errors.hp = "El valor debe estar entre 1 y 1000" 
+        if (input.attack > 1000 || input.attack < 1 || !/\d/g.test(input.attack)) errors.attack = "El valor debe estar entre 1 y 1000" 
+        if (input.defense > 1000 || input.defense < 1 || !/\d/g.test(input.defense)) errors.defense = "El valor debe estar entre 1 y 1000" 
+        if (input.speed > 1000 || input.speed < 1 || !/\d/g.test(input.speed)) errors.speed = "El valor debe estar entre 1 y 1000" 
+        if (input.height > 1000 || input.height < 1 || !/\d/g.test(input.height)) errors.height = "El valor debe estar entre 1 y 1000" 
+        if (input.weight > 1000 || input.weight < 1 || !/\d/g.test(input.weight)) errors.weight = "El valor debe estar entre 1 y 1000" 
         return errors;
     }
     

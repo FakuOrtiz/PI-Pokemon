@@ -81,13 +81,13 @@ const rootReducer = (state = initialState, action) => {
         case ORDER_ALPHABET:
             let pokesAlpha;
             if (action.payload === "az") {
-                pokesAlpha = state.pokemons.sort((a, b) => {
+                pokesAlpha = state.pokemonsFiltrados.sort((a, b) => {
                     if (a.name > b.name) return 1;
                     if (b.name > a.name) return -1;
                     return 0;
                 });
             } else {
-                pokesAlpha = state.pokemons.sort((a, b) => {
+                pokesAlpha = state.pokemonsFiltrados.sort((a, b) => {
                     if (a.name > b.name) return -1;
                     if (b.name > a.name) return 1;
                     return 0;
@@ -130,9 +130,9 @@ const rootReducer = (state = initialState, action) => {
         case ORDER_ATTACK:
             let pokesAttack;
             if (action.payload === "masAtaque") {
-                pokesAttack = state.pokemons.sort((a, b) => b.attack - a.attack);
+                pokesAttack = state.pokemonsFiltrados.sort((a, b) => b.attack - a.attack);
             } else {
-                pokesAttack = state.pokemons.sort((a, b) => a.attack - b.attack);
+                pokesAttack = state.pokemonsFiltrados.sort((a, b) => a.attack - b.attack);
             }
             // console.log(pokesAttack)
             return {
