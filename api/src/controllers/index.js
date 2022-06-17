@@ -48,15 +48,15 @@ module.exports = {
                     pokemons = pokemons.concat(pokemonsCreated);
                 }
 
-                res.json(pokemons)
+                return res.json(pokemons)
             } catch (error) {
-                next(error);
+                next(error); //errorHandler
             }
         }else{ //Si me pasan ?name=...
             try {
                 if (pokemonsCreated.length === 0) {
                     let {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-                    res.json(crearObj(data));
+                    return res.json(crearObj(data));
                 } else {
                     let find = await Pokemon.findOne({
                         where: {
@@ -71,16 +71,16 @@ module.exports = {
                         return res.json(find);
                     }
                     let {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-                    res.json(crearObj(data));
+                    return res.json(crearObj(data));
                 }
             } catch (error) {
-                res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
+                return res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
             }
         }
     },
 
     getOnePokemon: async (req, res, next) => {
-        let {id} = req.params;
+        let {id} = req.params; 
         
         if (id.includes("-")) {  //Si tiene "-", es un pokemon creado, sino viene de la API
             try {
@@ -91,18 +91,17 @@ module.exports = {
                         attributes: ["name"]
                     }
                 });
-                res.json(data);
+                return res.json(data);
             } catch (error) {
-                res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
+                return res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
             }
         }else{
             try {
                 let {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
 
-                res.json(crearObj(data));
+                return res.json(crearObj(data));
             } catch (error) {
-                console.log(error)
-                res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
+                return res.status(404).json({msj: "No se encuentra el pokemon solicitado"});
             }
         }
     },
@@ -119,7 +118,7 @@ module.exports = {
             let pokemon = {name, hp, attack, defense, speed, height, weight, image, type};
             let newPoke = await Pokemon.create(pokemon);
             await newPoke.addType(type);
-            res.json(newPoke);
+            return res.json(newPoke);
         } catch (error) {
             next(error);
         }
@@ -145,12 +144,12 @@ module.exports = {
                     }
         
                     let tipos = await Type.findAll();
-                    res.json(tipos);
+                    return res.json(tipos);
                 } catch (error) {
                     next(error);
                 }
             }else{
-                res.json(tiposDB);
+                return res.json(tiposDB);
             }
     }
 }

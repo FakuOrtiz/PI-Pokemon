@@ -6,6 +6,8 @@
 
 .error {
     color: red;
+    position: absolute;
+    left: 800px;
 }
 
 .buttonCrear {
