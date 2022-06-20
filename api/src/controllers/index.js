@@ -20,7 +20,7 @@ module.exports = {
     getPokemons: async (req, res, next) => {
         let {name} = req.query;
         let pokemonsCreated = await Pokemon.findAll({
-            include: { //Lo traigo linkeado a la tabla Type con sus atributos
+            include: {
                 model: Type,
                 attributes: ["name"]
             }
@@ -41,8 +41,6 @@ module.exports = {
 
                 if (pokemonsCreated.length > 0) {
                     pokemonsCreated = pokemonsCreated.map(p => {
-                        // console.log("p", p);
-                        // console.log("p.dataValues", p.dataValues)
                         return p.dataValues
                     });
                     pokemons = pokemons.concat(pokemonsCreated);
@@ -50,7 +48,7 @@ module.exports = {
 
                 return res.json(pokemons)
             } catch (error) {
-                next(error); //errorHandler
+                next(error);
             }
         }else{ //Si me pasan ?name=...
             try {
@@ -82,7 +80,7 @@ module.exports = {
     getOnePokemon: async (req, res, next) => {
         let {id} = req.params; 
         
-        if (id.includes("-")) {  //Si tiene "-", es un pokemon creado, sino viene de la API
+        if (id.includes("-")) {
             try {
                 let data = await Pokemon.findByPk(
                     id, {
@@ -107,7 +105,6 @@ module.exports = {
     },
 
     postPokemons: async (req, res, next) => {
-        //Los types llegan como un array de IDs
         let {name, hp, attack, defense, speed, height, weight, image, type} = req.body;
         if (!image || image === undefined || image === "" || !/(https?:\/\/.*\.(?:png|jpg|jpeg))/i.test(image)) {
             image = "https://camo.githubusercontent.com/5d1fe59c3f0e4cfb5480bb8d8b1eb3ba58906acef846904fde8afcc5f773adbb/68747470733a2f2f692e696d6775722e636f6d2f583962314b75362e706e67";
@@ -151,5 +148,38 @@ module.exports = {
             }else{
                 return res.json(tiposDB);
             }
+    },
+
+    deletePokemon: async (req, res, next) => {
+        let {id} = req.params;
+        if (!id) return res.status(404).json({msj: "No se envió un ID"});
+        try {
+            await Pokemon.destroy({
+                where: {
+                    id: id
+                }
+            });
+            
+            return res.json({msj: "Pokémon eliminado"});
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    updatePokemon: async (req, res, next) => {
+        let {name, hp, attack, defense, speed, height, weight, image, type} = req.body;
+        let {id} = req.params;
+        if (!image || image === undefined || image === "" || !/(https?:\/\/.*\.(?:png|jpg|jpeg))/i.test(image)) {
+            image = "https://camo.githubusercontent.com/5d1fe59c3f0e4cfb5480bb8d8b1eb3ba58906acef846904fde8afcc5f773adbb/68747470733a2f2f692e696d6775722e636f6d2f583962314b75362e706e67";
+        }
+        if (!type || type.length === 0) type = [10001];
+        try {
+            name = name.toLowerCase();
+            let pokemon = {name, hp, attack, defense, speed, height, weight, image, type};
+            await Pokemon.update({pokemon}, {where: {id: id}})
+            return req.send(pokemon);
+        } catch (error) {
+            next(error);
+        }
     }
 }

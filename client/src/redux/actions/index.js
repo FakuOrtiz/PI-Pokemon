@@ -11,6 +11,7 @@ export const FILTER_ORIGEN = "FILTER_ORIGEN";
 export const ORDER_ATTACK = "ORDER_ATTACK";
 export const FILTER_TYPE = "FILTER_TYPE";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const DELETE_POKE = "DELETE_POKE";
 
 export function getAllPokemons() {
     return function(dispatch) {
@@ -58,6 +59,17 @@ export function createPokemon(values) {
         }
     }
 };
+
+export function deletePokemon(id) {
+    return async function(dispatch) {
+        try {
+            await axios.delete(`http://localhost:3001/pokemons/${id}`);
+            dispatch({type: DELETE_POKE});
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 
 export const cleanCache = () => {
     return {type: CLEAN_CACHE}

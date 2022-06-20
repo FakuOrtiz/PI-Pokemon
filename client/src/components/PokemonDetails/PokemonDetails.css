@@ -4,6 +4,7 @@
     position: absolute;
     left: 1%;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .contenedorDetails {
@@ -32,4 +33,13 @@
     width: 300px;
     border-radius: 10px;
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.contenedorDelete {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.btnDelete {
+    cursor: pointer;
 }

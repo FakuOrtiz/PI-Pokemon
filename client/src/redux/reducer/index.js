@@ -11,7 +11,8 @@ import {
     CLEAN_CACHE_ALL,
     ORDER_ATTACK,
     FILTER_TYPE,
-    SET_CURRENT_PAGE
+    SET_CURRENT_PAGE,
+    DELETE_POKE
 } from "../actions"
 
 const initialState = {
@@ -66,6 +67,10 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             pokemons: [...state.pokemons, action.payload],
             pokemonsFiltrados: [...state.pokemons, action.payload],
+            page: 1
+        }
+        case DELETE_POKE: return {
+            ...state,
             page: 1
         }
         case CLEAN_CACHE: return {

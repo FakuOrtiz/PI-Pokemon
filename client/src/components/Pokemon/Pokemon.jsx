@@ -22,9 +22,9 @@ export default function Pokemon() {
   let page = useSelector(state => state.page);
   let pokesPerPage = 12;
 
-  const indexOfLastPoke = page * pokesPerPage; //1 * 12
-  const indexOfFirstPoke = indexOfLastPoke - pokesPerPage; //12 - 12 = 0
-  const currentPokes = pokemonsFiltrados.slice(indexOfFirstPoke, indexOfLastPoke); //0 - 12
+  const indexOfLastPoke = page * pokesPerPage; //2 * 12
+  const indexOfFirstPoke = indexOfLastPoke - pokesPerPage; //24 - 12 = 12
+  const currentPokes = pokemonsFiltrados.slice(indexOfFirstPoke, indexOfLastPoke); //12 - 24
 
   useEffect(() => {
     if (pokemons.length < 2) dispatch(getAllPokemons())
