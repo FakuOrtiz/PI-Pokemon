@@ -15,7 +15,7 @@ export const DELETE_POKE = "DELETE_POKE";
 
 export function getAllPokemons() {
     return function(dispatch) {
-        return fetch("http://localhost:3001/pokemons")
+        return fetch(`${axios.defaults.baseURL}/pokemons`)
         .then(r => r.json())
         .then(data => dispatch({type: GET_ALL_POKEMONS, payload: data}))
         .catch(e => console.log(e))
@@ -24,7 +24,7 @@ export function getAllPokemons() {
 
 export function getPokemonById(id) {
     return function (dispatch) {
-        return fetch(`http://localhost:3001/pokemons/${id}`)
+        return fetch(`${axios.defaults.baseURL}/pokemons/${id}`)
         .then(r => r.json())
         .then(data => dispatch({type: GET_POKEMON_BY_ID, payload: data}))
         .catch(e => console.log(e))
@@ -33,7 +33,7 @@ export function getPokemonById(id) {
 
 export function getPokemonByName(name) {
     return function(dispatch) {
-        return fetch(`http://localhost:3001/pokemons?name=${name}`)
+        return fetch(`${axios.defaults.baseURL}/pokemons?name=${name}`)
         .then(r => r.json())
         .then(data => dispatch({type: GET_POKEMON_BY_NAME, payload: data}))
         .catch(e => console.log(e))
@@ -42,7 +42,7 @@ export function getPokemonByName(name) {
 
 export function getAllTypes() {
     return function(dispatch) {
-        return fetch("http://localhost:3001/types")
+        return fetch(`${axios.defaults.baseURL}/types`)
         .then(r => r.json())
         .then(data => dispatch({type: GET_ALL_TYPES, payload: data}))
         .catch(e => console.log(e))
@@ -52,7 +52,7 @@ export function getAllTypes() {
 export function createPokemon(values) {
     return async function(dispatch) {
         try {
-            const {data} = await axios.post("http://localhost:3001/pokemons", values);
+            const {data} = await axios.post(`${axios.defaults.baseURL}/pokemons`, values);
             dispatch({type: CREATE_POKEMON, payload: data});
         } catch (error) {
             console.log(error);
@@ -63,7 +63,7 @@ export function createPokemon(values) {
 export function deletePokemon(id) {
     return async function(dispatch) {
         try {
-            await axios.delete(`http://localhost:3001/pokemons/${id}`);
+            await axios.delete(`${axios.defaults.baseURL}/pokemons/${id}`);
             dispatch({type: DELETE_POKE});
         } catch (error) {
             console.log(error)
