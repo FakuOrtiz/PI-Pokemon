@@ -1,0 +1,72 @@
+.buttonCrear {
+    cursor: pointer;
+    width: 90px;
+    height: 45px;
+    color: black;
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.buttonCrear:not(:disabled):hover {
+    background-color: #ffcc04
+}
+
+.buttonCrear:disabled {
+    border: 1px solid rgba(112, 112, 112, 0.753);
+    cursor: not-allowed;
+}
+
+.buttonSearch {
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.buttonSearch:not(:disabled):hover {
+    background-color: #ffcc04
+}
+
+.buttonSearch:disabled {
+    cursor: not-allowed;
+    border: none;
+}
+
+.inputSearch {
+    border: 0;
+    background-color: white;
+    border: 1px solid black;
+    height: 25px;
+    border-radius: 20px;
+    margin-right: 10px;
+    color: black;
+    text-align: center;
+}
+
+.inputSearch::placeholder {
+    color: rgba(0, 0, 0, 0.767);
+}
+
+.inputSearch:focus {
+    outline: none;
+}
+
+.contenedorSearchbar {
+    display: grid;
+    grid-template-columns: 250px 250px;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.contenedorButtonCrear {
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
+
+.contenedorButtonSearch {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    text-align: center;
+    margin: auto;
+}

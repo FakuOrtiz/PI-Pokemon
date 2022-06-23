@@ -1,0 +1,32 @@
+.contenedorInicio {
+    position: relative;
+    min-height: 100vh;
+    background-color: #1663b1;
+    color: white;
+}
+
+.tituloInicio {
+    position: absolute;
+    left: 15%;
+    top: 20%;
+}
+
+.tituloInicio:hover {
+    filter: opacity(.7);
+}
+
+.ash {
+    width: 25%;
+    position: absolute;
+    left: 60%;
+    top: 15%;
+}
+
+.clickParaEmpezar {
+    position: absolute;
+    font-size: 20px;
+    top: 50%;
+    left: 23%;
+    /* top: 310px;
+    left: 310px; */
+}
