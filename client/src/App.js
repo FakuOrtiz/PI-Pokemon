@@ -1,10 +1,10 @@
-import Pokemon from "./components/pokemon/Pokemon";
-import Inicio from "./components/inicio/Inicio";
-import NavBar from "./components/navBar/NavBar";
-import CrearPokemon from "./components/crearPokemon/CrearPokemon";
-import Footer from "./components/footer/Footer";
+import Pokemon from "./components/pokemon/Pokemon.jsx";
+import Inicio from "./components/inicio/Inicio.jsx";
+import NavBar from "./components/navBar/NavBar.jsx";
+import CrearPokemon from "./components/crearPokemon/CrearPokemon.jsx";
+import Footer from "./components/footer/Footer.jsx";
+import PokemonDetails from "./components/pokemonDetails/PokemonDetails.jsx";
 import {Switch, Route} from "react-router-dom";
-import PokemonDetails from "./components/pokemonDetails/PokemonDetails";
 import "./style/App.css"
 
 function App() {

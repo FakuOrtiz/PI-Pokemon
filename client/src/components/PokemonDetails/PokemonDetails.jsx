@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { cleanCache, cleanCacheAll, deletePokemon, getPokemonById } from "../../redux/actions";
-import Error404 from "../error404/Error404";
-import Loading from "../loading/Loading";
+import Error404 from "../error404/Error404.jsx";
+import Loading from "../loading/Loading.jsx";
 import "./PokemonDetails.css";
 
 

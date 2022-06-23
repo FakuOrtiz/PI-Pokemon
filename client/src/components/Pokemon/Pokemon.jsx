@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PokemonCard from "../pokemonCard/PokemonCard";
-import Loading from "../loading/Loading";
+import PokemonCard from "../pokemonCard/PokemonCard.jsx";
+import Loading from "../loading/Loading.jsx";
 import "./Pokemon.css"
 import { cleanCacheAll, orderByAlphabet, orderByAttack, filterByOrigen, filterByType, getAllPokemons, getAllTypes } from "../../redux/actions";
-import Paginacion from "../paginacion/Paginacion";
-import Error404 from "../error404/Error404";
+import Paginacion from "../paginacion/Paginacion.jsx";
+import Error404 from "../error404/Error404.jsx";
 
 export default function Pokemon() {
   let [/*filtrados*/, setFiltrados] = useState();
